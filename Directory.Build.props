@@ -1,0 +1,20 @@
+<Project>
+ <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <WarnOnPackingNonPackableProject>false</WarnOnPackingNonPackableProject>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <NoWarn>649;CA2255;$(NoWarn)</NoWarn>
+    <DefineConstants Condition=" '$(CIRun)' == 'true' ">$(DefineConstants);CIRun</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <filesToDelete Include="bin\**\*.*" Exclude="bin\**\*.mdf;bin\**\*.ldf"/> 
+  </ItemGroup>
+  <Target Name="CleanAllBins" AfterTargets="Clean">
+    <Delete Files="@(filesToDelete)" />
+  </Target>
+</Project>
